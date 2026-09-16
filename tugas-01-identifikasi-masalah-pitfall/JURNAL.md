@@ -18,6 +18,8 @@
 - Bertrand mengomentari analisis Natan:
 Saya sepakat dengan penerapan solusi dari natan karena sudah cukup menjawab masalah dari packet loss ketika ada masalah pada sebuah jaringan, yang membuktikan bahwa network tidak reliable, dengan menerapkan fungsi coba lagi/refresh agar data dapat disinkronkan kembali.
 
+- Nayottama Lucky Mustafa mengomentari analisis Bertrand Lianto:  Saya setuju dengan analisis Bertrand, karena penjelasan serta solusinya sudah cukup menjawab dengan baik. Namun ada tambahan kecil untuk melengkapi pada bagian dampak. Kalimat "banyak permintaan masuk lalu server kewalahan" secara teknis terjadi karena permintaan yang terus menunggu akan menahan thread hingga server kehabisan resource.
+
 
 
 ## Log Penggunaan AI (Level 2)
