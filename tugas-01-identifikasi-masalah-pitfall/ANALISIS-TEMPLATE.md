@@ -1,6 +1,6 @@
 # Tugas 1 — Analisis Pitfall FoodGo
 
-**Kelompok:** [nama kelompok]
+**Kelompok:** Fnatic
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
@@ -53,4 +53,4 @@ Lalu apabila tombol ditekan secara terus - menerus (spam) dalam jumlah yang bany
 
 ## Kesimpulan Kelompok
 
-[Ringkasan: jika FoodGo memperbaiki ketiga pitfall ini, apa arsitektur yang disarankan secara garis besar? Kaitkan dengan Tugas 2.]
+Jika FoodGo memperbaiki ketiga pitfall ini, maka arsitektur yang dapat digunakan adalah RESTful dikarenakan cukup mudah untuk dimaintenance serta memungkinkan adanya penambahan, penghapusan, pengambilan, dan modifikasi data secara remote.
