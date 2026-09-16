@@ -15,6 +15,9 @@
 
 - Natan mengomentari analisis Nayo: Dari apa yang saya baca penerapan solusi dan penjelasan dampak sudah sangat jelas dikarenakan apabila salah satu process terkena masalah maka process lain dapat terganggu, dan penerapan docker masih dinilai lebih masuk akal daripada berpindah sepenuhnya ke microservices ketika dihandle oleh sebuah tim dengan skala kecil.
 
+- Bertrand mengomentari analisis Natan:
+Saya sepakat dengan penerapan solusi dari natan karena sudah cukup menjawab masalah dari packet loss ketika ada masalah pada sebuah jaringan, yang membuktikan bahwa network tidak reliable, dengan menerapkan fungsi coba lagi/refresh agar data dapat disinkronkan kembali.
+
 
 
 ## Log Penggunaan AI (Level 2)
