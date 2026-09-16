@@ -2,10 +2,10 @@
 
 > Isi jurnal ini selama proses diskusi berlangsung, bukan ditulis ulang rapi di akhir. Tulis dengan gaya bebas — poin diskusi, kebuntuan, perubahan pikiran.
 
-## [Tanggal diskusi 1]
-- Peserta: [nama-nama yang hadir]
-- Poin diskusi: ...
-- Perbedaan pendapat (jika ada): ...
+## 16/09/26
+- Peserta: [ NATAN WINSON PRATAMA, BERTRAND LIANTO, NAYOTTAMA LUCKY MUSTAFA ]
+- Poin diskusi: PITFALL, SOLUSI, TRADE-OFF, DAN SHARING PENGALAMAN
+- Perbedaan pendapat (jika ada): Penentuan Pitfall, dan solusi.
 
 ## [Tanggal diskusi 2]
 - ...
