@@ -28,9 +28,17 @@
 
 ---
 
-## Pitfall 3: [nama pitfall] — ditulis oleh NAYOTTAMA LUCKY MUSTAFA
+## Pitfall 3: [Single Point of Failure akibat Arsitektur Monolitik] — ditulis oleh NAYOTTAMA LUCKY MUSTAFA
 
-(ulangi struktur di atas)
+**Bukti di skenario:** "satu server yang menangani semua modul (pesanan, pembayaran, notifikasi kurir) kewalahan karena semuanya berjalan di satu proses monolitik yang sama."
+
+**Kenapa ini keliru:** Jika arsitektur di design [monolitik](https://binus.ac.id/bekasi/2025/06/arsitektur-monolithic/), tidak ada sekat pemisah antar modul. Selain itu, sistem monolitik sulit untuk di scale secara spesifik (misalkan FoodGo membutuhkan tambahan server untuk layanan payment, maka pada arsitektur monolitik resource seluruh aplikasi harus ditingkatkan, bukan hanya pada bagian payment).
+
+**Dampak ke FoodGo:** Karena semua berjalan di proses yang sama, masalah di satu titik akan meruntuhkan seluruh sistem. Jadi misalkan ketika modul pesanan kehabisan thread akibat tertahan oleh modul pembayaran, menyebabkan seluruh CPU dan RAM tersedot di server tersebut. Akibatnya, server backend crash total dan seluruh fitur (bahkan notifikasi kurir yang tidak ada hubungannya dengan pembayaran) ikut mati secara bersamaan, sehingga harus di-restart manual.
+
+**Solusi desain awal:** Mempertahankan arsitektur monolitik namun memisahkan proses penanganan beban kerja dengan menggunakan Docker. Penerapan Docker pada arsitektur monolitik memberikan isolasi proses melalui container yang berjalan secara terpisah, jadi gangguan pada satu proses tidak secara langsung memengaruhi proses lainnya (misal, apabila proses pembayaran mengalami crash, container web utama yang bertugas menerima pesanan tetap dapat berjalan). Selain itu, Docker juga mendukung auto-recover atau reload otomatis melalui konfigurasi.
+
+**Trade-off:** Tambahan kompleksitas operasional dan pelacakan log.
 
 ---
 
