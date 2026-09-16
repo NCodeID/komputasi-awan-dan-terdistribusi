@@ -32,7 +32,7 @@
 
 **Solusi desain awal:** Memberikan timeout pada sebuah pemanggilan service sehingga ketika ada permintaan yang membutuhkan waktu yang sangat lama, maka permintaan itu akan dihapus sehingga permintaan yang masuk akan jauh lebih sedikit, dan aplikasi akan menjadi lebih ringan. 
 
-**Trade-off:** Tidak ada trade off.
+**Trade-off:** Jika timeout terlalu cepat, maka log timeout pada server akan membengkak.
 
 ---
 
