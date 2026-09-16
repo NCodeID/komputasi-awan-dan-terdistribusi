@@ -4,11 +4,11 @@
 
 | Nama | NIM | Kontribusi |
 |---|---|---|
-| [nama 1] | [nim] | [pitfall/bagian yang dikerjakan] |
-| [nama 2] | [nim] | [pitfall/bagian yang dikerjakan] |
-| [nama 3] | [nim] | [pitfall/bagian yang dikerjakan] |
+| NATAN WINSON PRATAMA | 103072400025 | 1 |
+| BERTRAND LIANTO | 103072400019 | 2 |
+| NAYOTTAMA LUCKY MUSTAFA | 103072430011 | 3 |
 
-## Pitfall 1: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 1: [nama pitfall] — ditulis oleh NATAN WINSON PRATAMA
 
 **Bukti di skenario:** [kutip/paraphrase bagian skenario]
 
@@ -22,13 +22,13 @@
 
 ---
 
-## Pitfall 2: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 2: [nama pitfall] — ditulis oleh BERTRAND LIANTO
 
 (ulangi struktur di atas)
 
 ---
 
-## Pitfall 3: [nama pitfall] — ditulis oleh [nama]
+## Pitfall 3: [nama pitfall] — ditulis oleh NAYOTTAMA LUCKY MUSTAFA
 
 (ulangi struktur di atas)
 
