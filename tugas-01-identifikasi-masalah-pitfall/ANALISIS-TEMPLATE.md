@@ -22,9 +22,17 @@
 
 ---
 
-## Pitfall 2: [nama pitfall] — ditulis oleh BERTRAND LIANTO
+## Pitfall 2: [Latency is Zero] — ditulis oleh BERTRAND LIANTO
 
-(ulangi struktur di atas)
+**Bukti di skenario:** "tidak ada timeout sama sekali pada pemanggilan antar service (modul pesanan memanggil modul pembayaran dan menunggu tanpa batas waktu)."
+
+**Kenapa ini keliru:** Karena untuk melakukan pemanggilan antar service diperlukan waktu yang tidak terjadi secara instan, sehingga diperlukan adanya timeout bila sebuah pemanggilan sebuah service melewati batas waktu tertentu.
+
+**Dampak ke FoodGo:** Bila sebuah pemanggilan sebuah service tidak ada timeout, maka akan ada banyak permintaan yang masuk, yang menyebabkan server kewalahan sehingga aplikasi akan menjadi sangat lambat.
+
+**Solusi desain awal:** Memberikan timeout pada sebuah pemanggilan service sehingga ketika ada permintaan yang membutuhkan waktu yang sangat lama, maka permintaan itu akan dihapus sehingga permintaan yang masuk akan jauh lebih sedikit, dan aplikasi akan menjadi lebih ringan. 
+
+**Trade-off:** Tidak ada trade off.
 
 ---
 
