@@ -11,7 +11,11 @@
 - ...
 
 ## Review Silang
-- [Nama] mengomentari analisis [Nama lain]: ...
+- Natan mengomentari analisis Bertrand: Dari apa yang saya baca penerapan timeout pada solusi sudah tepat hal ini dikarenakan penerapan sebuah timeout tidak memakan banyak biaya memungkinkan untuk dikerjakan oleh tim kecil.
+
+- Natan mengomentari analisis Nayo: Dari apa yang saya baca penerapan solusi dan penjelasan dampak sudah sangat jelas dikarenakan apabila salah satu process terkena masalah maka process lain dapat terganggu, dan penerapan docker masih dinilai lebih masuk akal daripada berpindah sepenuhnya ke microservices ketika dihandle oleh sebuah tim dengan skala kecil.
+
+
 
 ## Log Penggunaan AI (Level 2)
 
