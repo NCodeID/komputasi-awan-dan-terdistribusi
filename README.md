@@ -1,5 +1,5 @@
 # Komputasi Awan & Sistem Terdistribusi — Repositori Tugas
-
+ 
 Repositori ini berisi seluruh tugas mata kuliah **Sistem Terdistribusi & Komputasi Awan**, dari **Tugas 1** sampai **Tugas 15**, disusun per pekan mengikuti RPS. Semua tugas dirancang dengan tiga batasan ketat:
 
 1. **Cukup laptop.** Tidak ada tugas yang mewajibkan sewa VM cloud berbayar. Simulasi "server", "VM", atau "cluster" dijalankan lokal memakai Docker/Docker Compose di laptop masing-masing. Untuk Tugas 12 (PaaS) mahasiswa memang perlu mendaftar akun **gratis** (free tier, tanpa kartu kredit/tagihan) di penyedia PaaS — dijelaskan detail di folder tugasnya.
@@ -43,4 +43,4 @@ Setiap folder `tugas-XX-.../` punya `README.md` sendiri berisi: studi kasus, tuj
 5. Jika memakai AI untuk brainstorming/structuring (Level 2), catat sesi pemakaiannya di bagian "Log Penggunaan AI" pada `JURNAL.md` tugas terkait.
 6. **Sebelum deadline, buat git tag** menandai commit final tugas tersebut (mis. `tugas-03-submit`), push tag-nya, lalu **kumpulkan link permalink ke folder tugas pada tag tersebut** di assignment terkait di LMS (Moodle). Lihat tutorial lengkap + contoh di [`HANDBOOK.md`](HANDBOOK.md#25-cara-submit-tugas-git-tag--link-ke-lms-moodle) — **bukan** lewat Pull Request.
 
-Selamat mengerjakan — pakai AI secukupnya untuk mencari ide, tapi pastikan tangan (dan otak) kalian sendiri yang menulis, mengetik, dan men-debug hasil akhirnya.
+Selamat mengerjakan — pakai AI secukupnya untuk mencari ide, tapi pastikan tangan (dan otak) kalian sendiri yang menulis, mengetik, dan men-debug hasil akhirnya. 
