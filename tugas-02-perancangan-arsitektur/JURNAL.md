@@ -2,14 +2,17 @@
 
 ## 23/09/2026
 - Opsi arsitektur yang dipertimbangkan: Pub-Sub
-- Kenapa akhirnya pilih [SOA/Pub-Sub]:
+- Kenapa akhirnya pilih [SOA/Pub-Sub]:  
 Alasan memilih Pub-Sub: 
 Kami memilih arsitektur (Pub-Sub) karena arsitektur ini menerapkan sistem message broker. Modul Pesanan sebagai publisher tidak perlu terikat secara langsung dengan Modul Kurir atau Resto sebagai subscriber. Jika Modul Kurir mengalami gangguan atau crash, Modul Pesanan tidak akan ikut terganggu , karena pesan akan ditampung sementara oleh broker sampai subscriber kembali aktif.
 
-- Mengapa bisa mengatasi coupling:
-Kelebihan <br>
-- Jika tim Modul Resto sedang melakukan deploy versi baru dan servernya restart, Modul pesanan tetap bisa menerima order dari pelanggan. Order tersebut akan tertahan di Message Broker / Antrian dan baru diproses ketika servernya menyala kembali. Tidak seperti sebelumnya bila server down, maka akan terjadi downtime total.
-- Jika beban kurir sedang tinggi, sistem bisa memperbanyak hanya instance server Modul Kurir-nya saja
+- Mengapa bisa mengatasi coupling:  
+    1. Kelebihan:  
+    - Jika tim Modul Resto sedang melakukan deploy versi baru dan servernya restart, Modul pesanan tetap bisa menerima order dari pelanggan. Order tersebut akan tertahan di Message Broker / Antrian dan baru diproses ketika servernya menyala kembali. Tidak seperti sebelumnya bila server down, maka akan terjadi downtime total.  
+    - Jika beban kurir sedang tinggi, sistem bisa memperbanyak hanya instance server Modul Kurir-nya saja.
+
+    2. Trade Off:  
+    - Menukar masalah coupling dengan kompleksitas debugging dan asinkronitas data. Karena alur komunikasi kini bersifat asinkron dan tidak linear, troubleshooting menjadi lebih sulit akibat jejak data tersebar di berbagai modul dan message broker. Selain itu, karena seluruh proses menjadi asinkron, validasi pembayaran tidak lagi terjadi secara real time.
 
 - Revisi diagram (versi 1 → versi 2, apa yang berubah dan kenapa): ...
 
