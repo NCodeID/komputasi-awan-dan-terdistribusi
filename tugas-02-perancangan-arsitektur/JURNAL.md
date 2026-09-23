@@ -1,8 +1,11 @@
 # Jurnal Proses — Tugas 2
 
-## [Tanggal]
-- Opsi arsitektur yang dipertimbangkan: ...
-- Kenapa akhirnya pilih [SOA/Pub-Sub]: ...
+## 23/09/2026
+- Opsi arsitektur yang dipertimbangkan: Pub-Sub
+- Kenapa akhirnya pilih [SOA/Pub-Sub]:
+Alasan memilih Pub-Sub: 
+Kami memilih arsitektur (Pub-Sub) karena arsitektur ini menerapkan sistem message broker. Modul Pesanan sebagai publisher tidak perlu terikat secara langsung dengan Modul Kurir atau Resto sebagai subscriber. Jika Modul Kurir mengalami gangguan atau crash, Modul Pesanan tidak akan ikut terganggu , karena pesan akan ditampung sementara oleh broker sampai subscriber kembali aktif.
+
 - Revisi diagram (versi 1 → versi 2, apa yang berubah dan kenapa): ...
 
 ## Log Penggunaan AI (Level 2)
@@ -11,4 +14,5 @@
 
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| 23/09/2026 | Groq | Apa yang membuat service dikatakan coupled | Temporal Coupling, Database Coupling, Schema Coupling, Infrastruktur. | mengaplikasikan informasi dari AI yang ada kepada studi kasus yand diberikan |
+| 23/09/2026 | Gemini | Apakah urutan Pub-Sub konsisten | Tidak dijamin jika dikirim secara bersamaan | menambahkan  | Melihat studi kasus dan mempertimbangkan ringkasan AI |
