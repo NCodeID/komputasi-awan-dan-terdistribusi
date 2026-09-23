@@ -9,7 +9,7 @@ Kami memilih arsitektur (Pub-Sub) karena arsitektur ini menerapkan sistem messag
 - Mengapa bisa mengatasi coupling:  
     1. Kelebihan:  
     - Jika tim Modul Resto sedang melakukan deploy versi baru dan servernya restart, Modul pesanan tetap bisa menerima order dari pelanggan. Order tersebut akan tertahan di Message Broker / Antrian dan baru diproses ketika servernya menyala kembali. Tidak seperti sebelumnya bila server down, maka akan terjadi downtime total.  
-    - Jika beban kurir sedang tinggi, sistem bisa memperbanyak hanya instance server Modul Kurir-nya saja.
+    - Jika beban service notifikasi kurir sedang tinggi, sistem bisa memperbanyak hanya instance server Modul Kurir-nya saja.
 
     2. Trade Off:  
     - Menukar masalah coupling dengan kompleksitas debugging dan asinkronitas data. Karena alur komunikasi kini bersifat asinkron dan tidak linear, troubleshooting menjadi lebih sulit akibat jejak data tersebar di berbagai modul dan message broker. Selain itu, karena seluruh proses menjadi asinkron, validasi pembayaran tidak lagi terjadi secara real time.
