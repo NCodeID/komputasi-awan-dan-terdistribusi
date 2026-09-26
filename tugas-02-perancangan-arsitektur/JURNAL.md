@@ -55,4 +55,4 @@ SOA digunakan untuk interaksi yang membutuhkan validasi seketika (request-respon
 | Tanggal | Tool AI | Prompt yang diberikan | Ringkasan saran/ide AI | Bagaimana diolah jadi tulisan/kode sendiri |
 |---|---|---|---|---|
 | 23/09/2026 | Groq | Apa yang membuat service dikatakan coupled | Temporal Coupling, Database Coupling, Schema Coupling, Infrastruktur. | mengaplikasikan informasi dari AI yang ada kepada studi kasus yand diberikan |
-| 23/09/2026 | Gemini | Apakah urutan Pub-Sub konsisten | Tidak dijamin jika dikirim secara bersamaan | menambahkan  | Melihat studi kasus dan mempertimbangkan ringkasan AI |
+| 23/09/2026 | Gemini | Apakah urutan Pub-Sub konsisten | Tidak dijamin jika dikirim secara bersamaan | Melihat studi kasus dan mempertimbangkan ringkasan AI |
