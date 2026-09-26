@@ -64,6 +64,28 @@ Kami menerapkan SOA dan Pub-Sub untuk menjamin alur jalannya sistem kami. Dengan
 </div>
 
 **2. Diagram Arsitektur**
+``` mermaid
+graph LR
+  Client[Aplikasi Client FoodGo]
+  Gateway[API Gateway]
+  OrderSvc[Service Pesanan]
+  PaymentSvc[Service Pembayaran]
+  Broker[Message Broker - RabbitMQ / Kafka]
+  Topic[Topic: order.events]
+  RestoSvc[Service Katalog Resto]
+  NotifSvc[Service Notifikasi Kurir]
+  NotifCustomerSvc[Service Notifikasi Pelanggan]
+
+  Client -->|"1. HTTP Request (sinkron)"| Gateway
+  Gateway -->|"2. Route Request"| OrderSvc
+  OrderSvc <-->|"3. RPC Sinkron (gRPC + Timeout)"| PaymentSvc
+  OrderSvc -->|"4. Publish Event: OrderPaid"| Broker
+  Broker --> Topic
+  Topic -->|"5a. Subscribe Event"| RestoSvc
+  Topic -->|"5b. Subscribe Event"| NotifSvc
+  Topic -->|"5c. Subscribe Event"| NotifCustomerSvc
+  NotifCustomerSvc -.->|"6. Push Notification"| Client
+```
 <br/>
 **3. Alur Sistem End-to-End**
 <br/>
