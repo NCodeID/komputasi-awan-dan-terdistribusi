@@ -3,8 +3,8 @@
 ## 23/09/2026
 - Opsi arsitektur yang dipertimbangkan: Pub-Sub
 - Kenapa akhirnya pilih [SOA/Pub-Sub]:  
-Alasan memilih Pub-Sub: 
-Kami memilih arsitektur (Pub-Sub) karena arsitektur ini menerapkan sistem message broker. Modul Pesanan sebagai publisher tidak perlu terikat secara langsung dengan Modul Kurir atau Resto sebagai subscriber. Jika Modul Kurir mengalami gangguan atau crash, Modul Pesanan tidak akan ikut terganggu , karena pesan akan ditampung sementara oleh broker sampai subscriber kembali aktif.
+Alasan memilih kombinasi SOA dan Pub-Sub: 
+SOA digunakan untuk interaksi yang membutuhkan validasi seketika (request-response sinkron), yaitu dari pelanggan ke modul pesanan, dan modul pesanan ke modul pembayaran. Sedangkan Pub-Sub dipilih karena arsitektur ini menerapkan sistem message broker. Modul Pesanan sebagai publisher tidak perlu terikat secara langsung dengan Modul Kurir atau Resto sebagai subscriber. Jika Modul Kurir mengalami gangguan atau crash, Modul Pesanan tidak akan ikut terganggu , karena pesan akan ditampung sementara oleh broker sampai subscriber kembali aktif.
 
 - Mengapa bisa mengatasi coupling:  
     1. Kelebihan:  
