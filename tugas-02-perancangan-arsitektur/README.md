@@ -58,7 +58,13 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 
 
 ## Hasil Diskusi Kelompok
-1. Pemilihan Arsitektur
-2. Diagram Arsitektur
-3. Alur Sistem End-to-End
-4. Analisis Coupling dan Trade-Off
+**1. Pemilihan Arsitektur**
+<div style="text-align: justify">
+Kami menerapkan SOA dan Pub-Sub untuk menjamin alur jalannya sistem kami. Dengan SOA, setiap layanan bersifat decoupled atau tidak terikat satu dengan yang lain, sehingga jika terjadi kendala pada satu layanan,maka layanan lain tetap dapat berjalan normal. Selain itu, model Pub-Sub kami pilih karena proses  yang ada berjalan asinkron, yang memungkinkan proses komunikasi menjadi lebih efisien melalui message broker.
+</div>
+
+**2. Diagram Arsitektur**
+<br/>
+**3. Alur Sistem End-to-End**
+<br/>
+**4. Analisis Coupling dan Trade-Off**
