@@ -89,7 +89,18 @@ graph LR
 <br/>
 
 **3. Alur Sistem End-to-End**  
+<div style="text-align: justify">
 Skenario dimulai ketika pelanggan menekan tombol pesan di Aplikasi FoodGo, yang memicu pengiriman HTTP Request secara sinkron (request-response) menuju API Gateway untuk kemudian diteruskan ke Service Pesanan (OrderSvc). Karena transaksi finansial membutuhkan kepastian instan, OrderSvc langsung memanggil Service Pembayaran (PaymentSvc) melalui komunikasi RPC yang juga bersifat sinkron, lengkap dengan mekanisme timeout untuk mencegah sistem macet jika jaringan pembayaran lambat. Setelah pembayaran dinyatakan sukses, OrderSvc menyelesaikan tugas transaksionalnya dan beralih menggunakan komunikasi asinkron (event-driven) dengan publish sebuah pesan kejadian yaitu event OrderPaid ke dalam Message Broker pada topic "order.events". Kemudian tiga layanan service secara otomatis subscribe topik tersebut secara asinkron. Lalu RestoSvc menerima pesan untuk mulai memasak makanan di dapur, NotifSvc bereaksi untuk menugaskan kurir terdekat, dan NotifCustomerSvc mengambil data untuk pelacakan. Lalu pada akhirnya NotifCustomerSvc secara asinkron mengirimkan Push Notification kembali ke Aplikasi Client untuk mengabarkan kepada pelanggan bahwa pesanan dan pembayarannya sedang diproses dengan sukses.
+</div>
 <br/>
 
-**4. Analisis Coupling dan Trade-Off**
+**4. Analisis Solusi Coupling dan Trade-Off**
+<div style="text-align: justify">
+<strong>Analisis Solusi Coupling:</strong><br/>
+Arsitektur SOA memecah fungsi sistem menjadi layanan‑layanan yang terpisah (tidak monoltik) sehingga tidak saling “terikat” satu sama lain. arsitektur pub-sub sendiri berkomunikasi antar layanan dilakukan lewat message broker, jadi mereka tidak perlu terhubung secara langsung. Sistem harus dapat mengatasi keterlambatan, kegagalan pengiriman, dan kemungkinan pesan diproses lebih dari sekali.
+</div>
+
+<div style="text-align: justify">
+<strong>Trade Off:</strong> <br/>
+Menukar masalah coupling dengan kompleksitas debugging dan asinkronitas data. Karena alur komunikasi kini bersifat asinkron dan tidak linear, troubleshooting menjadi lebih sulit akibat jejak data tersebar di berbagai modul dan message broker. Selain itu, karena seluruh proses menjadi asinkron, validasi pembayaran tidak lagi terjadi secara real time.
+</div>
