@@ -6,7 +6,7 @@ WORKDIR /app
 COPY requirements.txt .
 # TODO 2: Tulis perintah untuk install dependency dari requirements.txt.
 
-RUN "pip -r install requirements.txt"
+RUN pip install -r requirements.txt
 
 COPY src/ ./src/
 
