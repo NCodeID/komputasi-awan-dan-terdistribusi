@@ -6,7 +6,7 @@
 
 ## Percobaan dengan Lock
 - Hasil `processed_count` setelah perbaikan: 100 dari 100 pesanan
-Hasil processed_count setelah perbaikan
+- Hasil processed_count setelah perbaikan
 Dengan penambahan fitur lock maka saat thread melakukan perubahan, thread lainnya akan menunggu hingga perubahan tersebut selesai sehingga tidak akan terjadi saling timpa menimpa
 
 ## Kendala Docker
