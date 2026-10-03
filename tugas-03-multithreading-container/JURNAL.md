@@ -10,7 +10,8 @@
 Dengan penambahan fitur lock maka saat thread melakukan perubahan, thread lainnya akan menunggu hingga perubahan tersebut selesai sehingga tidak akan terjadi saling timpa menimpa
 
 ## Kendala Docker
-- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: ...
+- Error yang ditemui saat `docker build`/`docker run` dan cara memperbaikinya: 
+- Tidak ada.
 
 ## Log Penggunaan AI (Level 2)
 
