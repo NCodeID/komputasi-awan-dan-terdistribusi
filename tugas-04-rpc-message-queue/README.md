@@ -73,3 +73,32 @@ tugas-04-rpc-message-queue/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh bertanya konsep umum RPC/message queue ke AI; **tidak boleh** meminta AI menuliskan isi `# TODO` di `rpc/server.py`, `rpc/client.py`, `mq/publisher.py`, atau `mq/consumer.py`. Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - `JURNAL.md` wajib menjelaskan apa yang terjadi pada request RPC jika server mati di tengah proses (Jalur A), atau ke mana pesan "hilang sementara" tersimpan saat consumer mati (Jalur B) — jawaban generik/hafalan istilah tanpa mengaitkan ke hasil percobaan sendiri akan dinilai rendah.
+
+## Analisis Pilihan Pola Komunikasi (Soal 4)
+
+### Jalur A — RPC (Sinkron) untuk Operasi Cek Saldo & Proses Pembayaran
+
+**Kenapa cocok untuk skenario FoodGo:**
+1. **Konsistensi transaksional**: Pelanggan harus tahu seketika apakah pembayaran berhasil/gagal sebelum lanjut ke tahap berikutnya.
+2. **Validasi real-time**: Cek saldo (`cek_saldo`) dan potong saldo (`proses_pembayaran`) harus atomik dan mengembalikan status akhir saldo (tidak bisa "nanti saja").
+3. **Timeout terdefinisi**: Di Tugas 2 kita sudah menambahkan mekanisme timeout pada RPC untuk mencegah unlimited blocking.
+
+**Risiko jika RPC dipakai untuk skenario yang salah (mis. notifikasi kurir):**  
+Jika `OrderSvc` memanggil `NotifSvc` (kurir) via RPC sinkron:
+1. **Modul Pembayaran/Pesanan ikut lambat/diblokir** saat kurir down atau lambat merespons, thread yang menangani pesanan tertahan menunggu balasan.
+2. **Cascading failure**: Saat promo besar, ribuan pesanan masuk, kemudian semua thread tertahan di RPC ke kurir dan thread pool habis, lalu server crash (single point of failure).
+3. **Tidak ada retry alami**: RPC sinkron tidak menyimpan permintaan, jika kurir restart maka event notifikasi hilang.
+
+---
+
+### Jalur B — Message Queue (Asinkron) untuk Event Notifikasi Pembayaran Berhasil
+
+**Kenapa cocok untuk skenario FoodGo:**
+1. **Fire and forget**: Publisher selesai segera setelah `basic_publish`, tidak peduli consumer hidup/mati (decoupling).
+2. **Durabilitas pesan**: Dengan `durable=True` + `delivery_mode=2`, pesan `pembayaran_berhasil` tersimpan di disk broker. Jika `consumer.py` (kurir) mati saat publisher kirim, pesan tetap aman dan diproses saat consumer nyala lagi (asynchronous decoupling).
+3. **Skalabilitas consumer**: Bisa jalankan banyak instance `consumer.py` (worker pool) untuk bagi beban notifikasi kurir saat trafik naik.
+
+**Risiko jika MQ dipakai untuk skenario yang salah (mis. cek saldo/proses pembayaran):**  
+Jika `OrderSvc` kirim "cek saldo" via MQ dan menunggu reply via queue balasan:
+1. **Latensi tak terduga**: Antrean bisa penuh, consumer lambat, respons sampai hitungan detik/menit sehingga pelanggan mengalami loading lama di UI "Memproses pembayaran...".
+2. **Kompleksitas request-reply palsu**: Perlu correlation ID, reply to queue, dan timeout handling (mirip RPC tapi lebih rapuh).
