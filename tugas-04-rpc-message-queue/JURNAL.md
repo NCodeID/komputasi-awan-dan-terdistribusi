@@ -1,12 +1,11 @@
 # Jurnal Proses — Tugas 4
 
 ## Jalur yang dipilih
-- [RPC / MQ / keduanya], alasan: <br>
-Keduanya, karena ingin mencoba kedua jalur 
+- RPC & MQ (Keduanya), alasan: Agar service yang ada pada FoodGo dapat berjalan secara sinkron dan asinkron.
 
 ## Kendala teknis
-- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): <br>
-Tidak ada, lancar
+- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
+- Pada saat melakukan percobaan antar mesin firewall menghalangi akses dari Komputer A ke Komputer B.
 
 ## Uji "pesan tidak hilang" (khusus Jalur B)
 - Langkah uji: matikan consumer → jalankan publisher → nyalakan consumer
