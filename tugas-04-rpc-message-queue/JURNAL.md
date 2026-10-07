@@ -1,14 +1,17 @@
 # Jurnal Proses — Tugas 4
 
 ## Jalur yang dipilih
-- [RPC / MQ / keduanya], alasan: ...
+- [RPC / MQ / keduanya], alasan: <br>
+Keduanya, karena ingin mencoba kedua jalur 
 
 ## Kendala teknis
-- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): ...
+- Error saat setup (mis. koneksi RabbitMQ ditolak, port bentrok): <br>
+Tidak ada, lancar
 
 ## Uji "pesan tidak hilang" (khusus Jalur B)
 - Langkah uji: matikan consumer → jalankan publisher → nyalakan consumer
-- Hasil yang diamati: ...
+- Hasil yang diamati: <br>
+Setelah pengamatan uji coba mematikan consumer, menjalankan publisher, kemudian menyalakan consumer lagi adalah pesan tidak hilang
 
 ## Log Penggunaan AI (Level 2)
 
