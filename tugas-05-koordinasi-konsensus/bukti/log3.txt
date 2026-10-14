@@ -1,19 +1,29 @@
-[Node 3] Listening di port 5003
-[Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
-[Node 3] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 5
-[Node 3] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 5
-[Node 3] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
-[Node 3] Leader 5 tidak merespons, memulai election baru
-[Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
-[Node 3] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 4
-[Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 4
-[Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 4
-[Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 3] Leader sekarang adalah 4
-[Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:17:30.545] [Node 3] Listening di port 5003
+[18:17:31.547] [Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:17:32.871] [Node 3] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[18:17:34.244] [Node 3] Leader sekarang adalah 5
+[18:17:34.244] [Node 3] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:17:35.196] [Node 3] Leader sekarang adalah 5
+[18:17:35.196] [Node 3] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:19:11.035] [Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:19:11.036] [Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:19:11.897] [Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:19:12.572] [Node 3] Leader 5 tidak merespons, memulai election baru
+[18:19:12.573] [Node 3] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:19:13.035] [Node 3] Menerima pesan 'ELECTION' dari node 1 (TODO: proses ini)
+[18:19:13.036] [Node 3] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[18:19:13.036] [Node 3] Leader sekarang adalah 4
+[18:19:13.036] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.037] [Node 3] Leader sekarang adalah 4
+[18:19:13.037] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.037] [Node 3] Leader sekarang adalah 4
+[18:19:13.037] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.038] [Node 3] Leader sekarang adalah 4
+[18:19:13.038] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.896] [Node 3] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[18:19:13.898] [Node 3] Leader sekarang adalah 4
+[18:19:13.898] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.899] [Node 3] Leader sekarang adalah 4
+[18:19:13.899] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:14.575] [Node 3] Leader sekarang adalah 4
+[18:19:14.575] [Node 3] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)

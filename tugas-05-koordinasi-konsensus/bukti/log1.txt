@@ -1,17 +1,24 @@
-[Node 1] Listening di port 5001
-[Node 1] Menerima pesan 'OK' dari node 2 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 5
-[Node 1] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 5
-[Node 1] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 4
-[Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 4
-[Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 4
-[Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 1] Leader sekarang adalah 4
-[Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
-[Node 1] Leader 4 tidak merespons, memulai election baru
-[Node 1] Menerima pesan 'OK' dari node 2 (TODO: proses ini)
-[Node 1] Menerima pesan 'OK' dari node 3 (TODO: proses ini)
+[18:17:29.006] [Node 1] Listening di port 5001
+[18:17:30.010] [Node 1] Menerima pesan 'OK' dari node 2 (TODO: proses ini)
+[18:17:34.243] [Node 1] Leader sekarang adalah 5
+[18:17:34.243] [Node 1] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:17:35.195] [Node 1] Leader sekarang adalah 5
+[18:17:35.195] [Node 1] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:19:11.033] [Node 1] Leader 5 tidak merespons, memulai election baru
+[18:19:11.034] [Node 1] Menerima pesan 'OK' dari node 2 (TODO: proses ini)
+[18:19:11.034] [Node 1] Menerima pesan 'OK' dari node 3 (TODO: proses ini)
+[18:19:11.035] [Node 1] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[18:19:13.036] [Node 1] Leader sekarang adalah 4
+[18:19:13.036] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.036] [Node 1] Leader sekarang adalah 4
+[18:19:13.036] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.036] [Node 1] Leader sekarang adalah 4
+[18:19:13.036] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.037] [Node 1] Leader sekarang adalah 4
+[18:19:13.037] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.897] [Node 1] Leader sekarang adalah 4
+[18:19:13.897] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:13.898] [Node 1] Leader sekarang adalah 4
+[18:19:13.898] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[18:19:14.574] [Node 1] Leader sekarang adalah 4
+[18:19:14.574] [Node 1] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)

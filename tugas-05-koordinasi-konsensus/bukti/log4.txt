@@ -1,19 +1,25 @@
-[Node 4] Listening di port 5004
-[Node 4] Menerima pesan 'OK' dari node 5 (TODO: proses ini)
-[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
-[Node 4] Leader sekarang adalah 5
-[Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 4] Leader sekarang adalah 5
-[Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
-[Node 4] Leader 5 tidak merespons, memulai election baru
-[Node 4] Menjadi leader, broadcast COORDINATOR
-[Node 4] Menjadi leader, broadcast COORDINATOR
-[Node 4] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
-[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
-[Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
-[Node 4] Menjadi leader, broadcast COORDINATOR
-[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
-[Node 4] Menjadi leader, broadcast COORDINATOR
-[Node 4] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
-[Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
-[Node 4] Menerima pesan 'PING' dari node 3 (TODO: proses ini)
+[18:17:31.239] [Node 4] Listening di port 5004
+[18:17:32.242] [Node 4] Menerima pesan 'OK' dari node 5 (TODO: proses ini)
+[18:17:33.547] [Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[18:17:34.244] [Node 4] Leader sekarang adalah 5
+[18:17:34.244] [Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:17:35.196] [Node 4] Leader sekarang adalah 5
+[18:17:35.197] [Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[18:19:13.035] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.035] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.036] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.036] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.037] [Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[18:19:13.037] [Node 4] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[18:19:13.037] [Node 4] Menerima pesan 'ELECTION' dari node 1 (TODO: proses ini)
+[18:19:13.038] [Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[18:19:13.896] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.897] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:13.898] [Node 4] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[18:19:13.899] [Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[18:19:14.573] [Node 4] Menjadi leader, broadcast COORDINATOR
+[18:19:14.575] [Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[18:19:16.036] [Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[18:19:16.897] [Node 4] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
+[18:19:17.573] [Node 4] Menerima pesan 'PING' dari node 3 (TODO: proses ini)
+[18:19:19.037] [Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
