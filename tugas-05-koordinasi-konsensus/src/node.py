@@ -14,6 +14,7 @@ import argparse
 import socket
 import threading
 import time
+from datetime import datetime
 
 ELECTION_TIMEOUT = 2.0  # detik menunggu balasan OK sebelum menyatakan diri leader
 
@@ -28,6 +29,9 @@ class Node:
         self.lock = threading.Lock()
         self.election_aborted = False
 
+    def timestamp(self) -> str:
+        return datetime.now().strftime("%H:%M:%S.%f")[:-3]
+
     # ---------- Infrastruktur jaringan (SUDAH LENGKAP, jangan diubah) ----------
 
     def start_server(self):
@@ -35,7 +39,7 @@ class Node:
         server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server.bind(("localhost", self.port))
         server.listen()
-        print(f"[Node {self.node_id}] Listening di port {self.port}")
+        print(f"[{self.timestamp()}] [Node {self.node_id}] Listening di port {self.port}")
         while True:
             conn, _ = server.accept()
             threading.Thread(
@@ -79,11 +83,11 @@ class Node:
         elif msg_type == "COORDINATOR":
             with self.lock:
                 self.leader_id = sender_id
-            print(f"[Node {self.node_id}] Leader sekarang adalah {sender_id}")
+            print(f"[{self.timestamp()}] [Node {self.node_id}] Leader sekarang adalah {sender_id}")
         elif msg_type == "PING":
             pass
         print(
-            f"[Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)"
+            f"[{self.timestamp()}] [Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)"
         )
 
     def start_election(self):
@@ -106,7 +110,7 @@ class Node:
         # ke SEMUA peer (bukan cuma yang lebih tinggi).
         with self.lock:
             self.leader_id = self.node_id
-        print(f"[Node {self.node_id}] Menjadi leader, broadcast COORDINATOR")
+        print(f"[{self.timestamp()}] [Node {self.node_id}] Menjadi leader, broadcast COORDINATOR")
         for peer_id, peer_port in self.peers.items():
             self.send_message(peer_port, "COORDINATOR")
 
@@ -124,7 +128,7 @@ class Node:
                 leader_port = self.peers.get(leader_id)
                 if leader_port:
                     if not self.send_message(leader_port, "PING"):
-                        print(f"[Node {self.node_id}] Leader {leader_id} tidak merespons, memulai election baru")
+                        print(f"[{self.timestamp()}] [Node {self.node_id}] Leader {leader_id} tidak merespons, memulai election baru")
                         with self.lock:
                             if self.leader_id == leader_id:
                                 self.leader_id = None
