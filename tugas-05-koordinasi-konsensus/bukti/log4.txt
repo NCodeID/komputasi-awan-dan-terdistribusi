@@ -1,0 +1,19 @@
+[Node 4] Listening di port 5004
+[Node 4] Menerima pesan 'OK' dari node 5 (TODO: proses ini)
+[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[Node 4] Leader sekarang adalah 5
+[Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[Node 4] Leader sekarang adalah 5
+[Node 4] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[Node 4] Leader 5 tidak merespons, memulai election baru
+[Node 4] Menjadi leader, broadcast COORDINATOR
+[Node 4] Menjadi leader, broadcast COORDINATOR
+[Node 4] Menerima pesan 'ELECTION' dari node 2 (TODO: proses ini)
+[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[Node 4] Menjadi leader, broadcast COORDINATOR
+[Node 4] Menerima pesan 'ELECTION' dari node 3 (TODO: proses ini)
+[Node 4] Menjadi leader, broadcast COORDINATOR
+[Node 4] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
+[Node 4] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[Node 4] Menerima pesan 'PING' dari node 3 (TODO: proses ini)

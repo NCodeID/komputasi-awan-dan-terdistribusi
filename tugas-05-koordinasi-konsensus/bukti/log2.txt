@@ -1,0 +1,21 @@
+[Node 2] Listening di port 5002
+[Node 2] Menerima pesan 'OK' dari node 3 (TODO: proses ini)
+[Node 2] Menerima pesan 'ELECTION' dari node 1 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 5
+[Node 2] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 5
+[Node 2] Menerima pesan 'COORDINATOR' dari node 5 (TODO: proses ini)
+[Node 2] Leader 5 tidak merespons, memulai election baru
+[Node 2] Menerima pesan 'OK' dari node 3 (TODO: proses ini)
+[Node 2] Menerima pesan 'OK' dari node 4 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 4
+[Node 2] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 4
+[Node 2] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 4
+[Node 2] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[Node 2] Leader sekarang adalah 4
+[Node 2] Menerima pesan 'COORDINATOR' dari node 4 (TODO: proses ini)
+[Node 2] Leader 4 tidak merespons, memulai election baru
+[Node 2] Menerima pesan 'OK' dari node 3 (TODO: proses ini)
+[Node 2] Menerima pesan 'OK' dari node 3 (TODO: proses ini)

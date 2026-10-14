@@ -1,0 +1,17 @@
+[Node 5] Listening di port 5005
+[Node 5] Menjadi leader, broadcast COORDINATOR
+[Node 5] Menerima pesan 'ELECTION' dari node 4 (TODO: proses ini)
+[Node 5] Menjadi leader, broadcast COORDINATOR
+[Node 5] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 3 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 4 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 3 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 4 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 2 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 3 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 4 (TODO: proses ini)
+[Node 5] Menerima pesan 'PING' dari node 1 (TODO: proses ini)
