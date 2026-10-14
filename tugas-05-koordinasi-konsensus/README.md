@@ -75,3 +75,10 @@ Kesimpulannya adalah algoritma bully lebih cepat, sederhana, dan tidak berat kar
 sedangkan algoritma raft lebih lambat, kompleks, dan berat secara komputasi namun konsistensi tetap terjamin.
 
 ### Hasil Dari kedua Scenario
+#### Skenario 1: Start Normal
+- Leader yang terpilih: Node 5 (ID tertinggi).
+- Semua node mulai berjalan secara berurutan, dan setelah sleep 1 detik di `main()`, setiap node memulai proses pemilihan leader (`start_election`). Node 5, yang tidak memiliki peer dengan ID lebih tinggi, menjadi leader dan mengirim pesan `COORDINATOR` ke semua node lain. Semua node menerima pesan ini dan mengatur `leader_id` menjadi 5. Proses ini dapat dilihat pada log yang tercatat di `bukti/log1.txt` hingga `bukti/log5.txt`.
+
+#### Skenario 2: Leader Dimatikan
+- Leader baru yang terpilih: Node 4 (ID tertinggi kedua setelah node 5 dimatikan).
+- Ketika node 5 dimatikan, sistem mendeteksi bahwasannya tidak ada respon dari leader lama dan secara otomatis memicu pemilihan pemimpin baru. Node 4, yang memiliki ID tertinggi kedua, menjadi leader baru dalam waktu sekitar 3 detik. Proses ini mengikuti mekanisme algoritma Bully, di mana node dengan ID tertinggi yang masih aktif akan menjadi pemimpin baru setelah leader sebelumnya bermasalah (down).
