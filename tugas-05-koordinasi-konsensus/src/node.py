@@ -37,7 +37,9 @@ class Node:
         print(f"[Node {self.node_id}] Listening di port {self.port}")
         while True:
             conn, _ = server.accept()
-            threading.Thread(target=self.handle_connection, args=(conn,), daemon=True).start()
+            threading.Thread(
+                target=self.handle_connection, args=(conn,), daemon=True
+            ).start()
 
     def handle_connection(self, conn: socket.socket):
         with conn:
@@ -67,7 +69,18 @@ class Node:
         #   - "OK": tandai bahwa ada node lebih tinggi yang masih hidup, sehingga
         #     kita TIDAK boleh mendeklarasikan diri sebagai leader.
         #   - "COORDINATOR": simpan sender_id sebagai leader_id yang baru.
-        print(f"[Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)")
+        if msg_type == "ELECTION":
+            if self.node_id > sender_id:
+                self.send_message(self.peers[sender_id], "OK")
+                self.start_election()
+        elif msg_type == "OK":
+            self.election_aborted = True
+        elif msg_type == "COORDINATOR":
+            self.leader_id = sender_id
+            print(f"[Node {self.node_id}] Leader sekarang adalah {sender_id}")
+        print(
+            f"[Node {self.node_id}] Menerima pesan '{msg_type}' dari node {sender_id} (TODO: proses ini)"
+        )
 
     def start_election(self):
         """Dipanggil saat node ini mendeteksi leader tidak ada / tidak merespons."""
@@ -76,7 +89,9 @@ class Node:
         # diset di on_message saat menerima "OK").
         # Jika TIDAK ADA balasan "OK" dalam waktu tersebut -> panggil declare_leader().
         higher_peers = {pid: p for pid, p in self.peers.items() if pid > self.node_id}
-        print(f"[Node {self.node_id}] TODO: mulai election ke peer lebih tinggi: {higher_peers}")
+        print(
+            f"[Node {self.node_id}] TODO: mulai election ke peer lebih tinggi: {higher_peers}"
+        )
 
     def declare_leader(self):
         """Node ini menyatakan dirinya leader dan memberi tahu semua node lain."""
@@ -101,8 +116,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--id", type=int, required=True)
     parser.add_argument("--port", type=int, required=True)
-    parser.add_argument("--peers", type=str, required=True,
-                         help="daftar port peer dipisah koma, mis. 5002,5003,5004,5005")
+    parser.add_argument(
+        "--peers",
+        type=str,
+        required=True,
+        help="daftar port peer dipisah koma, mis. 5002,5003,5004,5005",
+    )
     args = parser.parse_args()
 
     # Asumsi konvensi port: id N selalu di port 5000+N (lihat contoh perintah di README).
