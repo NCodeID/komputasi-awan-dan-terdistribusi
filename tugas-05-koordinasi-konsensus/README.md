@@ -70,5 +70,8 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 Leader diperlukan sebagai sebuah entitas (single source of truth) yang bertanggung jawab mengatur dan menentukan urutan resmi pemrosesan pesanan pada sistem FoodGo. Tanpa leader, ketidaksinkronan jam fisik antar-server akan menyebabkan konflik urutan antrean dan resiko pemrosesan ganda (_double processing_). Dengan adanya satu leader yang mengatur maka, seluruh pesanan diproses secara sekuensial dan konsisten sehingga integritas data transaksi tetap terjaga.
 
 ### Mengapa menggunakan algoritma Bully dan bukan Raft
+Karena algoritma bully dapat secara otomatis memilih leader baru berdasarkan ID tertinggi dan tidak perlu sekompleks raft pada kasus ini karena untuk algoritma raft perlu diadakan voting dan pemilihan berdasarkan mayoritas suara. <br>
+Kesimpulannya adalah algoritma bully lebih cepat, sederhana, dan tidak berat karena pemilihan leadernya mudah
+sedangkan algoritma raft lebih lambat, kompleks, dan berat secara komputasi namun konsistensi tetap terjamin.
 
 ### Hasil Dari kedua Scenario
