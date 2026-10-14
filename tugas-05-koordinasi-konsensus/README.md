@@ -67,6 +67,8 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 
 ### Analisis Kenapa Perlu Leader
 
+Leader diperlukan sebagai sebuah entitas (single source of truth) yang bertanggung jawab mengatur dan menentukan urutan resmi pemrosesan pesanan pada sistem FoodGo. Tanpa leader, ketidaksinkronan jam fisik antar-server akan menyebabkan konflik urutan antrean dan resiko pemrosesan ganda (_double processing_). Dengan adanya satu leader yang mengatur maka, seluruh pesanan diproses secara sekuensial dan konsisten sehingga integritas data transaksi tetap terjaga.
+
 ### Mengapa menggunakan algoritma Bully dan bukan Raft
 
 ### Hasil Dari kedua Scenario
