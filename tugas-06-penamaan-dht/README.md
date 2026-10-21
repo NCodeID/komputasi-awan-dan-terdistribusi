@@ -55,3 +55,11 @@ tugas-06-penamaan-dht/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh bertanya konsep umum consistent hashing/Chord ke AI; **tidak boleh** meminta AI menuliskan isi `# TODO` di `src/chord_simulation.py` (`find_successor`, `join`, `leave`, dst). Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - `README.md` wajib menelusuri manual (langkah demi langkah) bagaimana `lookup()` menemukan successor untuk salah satu ID Kurir contoh yang dipakai di `chord_simulation.py` — bukan cuma menempelkan output program.
+
+## Hasil Analisis Kelompok:
+
+### 1. Keunggulan DHT/Chord Dibandingkan Flat Naming dan DNS Konvensional
+
+### 2. Topologi Ring Simulasi dan Pemetaan ID Kurir
+
+### 3. 
