@@ -26,7 +26,13 @@ python3 src/chord_simulation.py
 
 ## Tugas Analisis (`README.md`)
 
-1. Jelaskan **kenapa DHT/Chord** lebih cocok untuk kasus ini dibanding **flat naming sederhana** (mis. tabel pusat ID→IP) atau **DNS konvensional** — kaitkan dengan sifat "IP kurir sering berubah" dan kebutuhan tanpa titik gagal tunggal.
+1. Jelaskan **kenapa DHT/Chord** lebih cocok untuk kasus ini dibanding **flat naming sederhana** (mis. tabel pusat ID→IP) atau **DNS konvensional** — kaitkan dengan sifat "IP kurir sering berubah" dan kebutuhan tanpa titik gagal tunggal. <br>
+Pada studi kasus FoodGo, setiap kurir mempunyai ID kurir yang bersifat tetap (fixed) tetapi alamat IPnya berubah ketika kurir berpindah tempat, sehingga FoodGo membutuhkan sistem penamaan yang menghubungkan ID kurir dengan alamat IP terkini secara efisien, tanpa bergantung pada server pusat.
+Jika kita menggunakan flat naming sederhana, memang terlihat mudah untuk diimplementasikan namun ketika jumlah kurir dan pencarian meningkat maka setiap perubahan ip diperbarui pada tabel pusat yang dapat menyebabkan terjadinya bottleneck, jika kita menggunakan DHT/Chord ketika alamat ip kurir berubah maka pemetaan hanya diperbarui pada node yang bertanggung jawab menanganinya, jika menggunakan dns konvensional, perubahan tidak langsung terlihat oleh semua klien, karena hasil pencarian masih disimpan didalam cache selama periode TTL, akibatnya klien dapat menggunakan alamat ip lama sebelum cache kadaluwarsa/diperbarui.
+<br>
+Keunggulan mengguanakan alamat DHT/Chord Id kurir dapat digunakan sebagai identitas sedangkan alamat IP dapat diperbarui secara otomatis bila kurir berpindah lokasi.
+Serta menghindari ketergantungan dengan server pusat, karena akan didistribusikan kepada node yang bertanggung jawab menanganinya, serta pencarian dapat menjadi lebih efisien. 
+
 2. Gambarkan (boleh pakai Mermaid, lihat Tugas 2) ring topology dari simulasi kalian, tandai node mana yang bertanggung jawab atas ID Kurir mana.
 3. Jelaskan apa yang terjadi pada mapping saat sebuah node **keluar** dari ring (siapa yang mengambil alih tanggung jawabnya) — dukung dengan output program.
 
