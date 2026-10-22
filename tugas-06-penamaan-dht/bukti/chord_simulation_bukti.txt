@@ -1,0 +1,49 @@
+[TODO] Node 'node-jakarta-1' (id=177) bergabung, alamat 10.0.0.1
+[JOIN] Node 'node-jakarta-1' (id=177) bergabung, alamat 10.0.0.1
+[TODO] Node 'node-jakarta-2' (id=102) bergabung, alamat 10.0.0.2
+[JOIN] Node 'node-jakarta-2' (id=102) bergabung, alamat 10.0.0.2
+Successor lama untuk id=102: 177
+Tidak ada key yang berpindah tanggung jawab
+[TODO] Node 'node-bandung-1' (id=40) bergabung, alamat 10.0.0.3
+[JOIN] Node 'node-bandung-1' (id=40) bergabung, alamat 10.0.0.3
+Successor lama untuk id=40: 102
+Tidak ada key yang berpindah tanggung jawab
+[TODO] Node 'node-surabaya-1' (id=136) bergabung, alamat 10.0.0.4
+[JOIN] Node 'node-surabaya-1' (id=136) bergabung, alamat 10.0.0.4
+Successor lama untuk id=136: 177
+Tidak ada key yang berpindah tanggung jawab
+[REGISTER] Kurir 'kurir-001' (hash=50) disimpan di node 102
+[REGISTER] Kurir 'kurir-002' (hash=28) disimpan di node 40
+[REGISTER] Kurir 'kurir-003' (hash=132) disimpan di node 136
+[REGISTER] Kurir 'kurir-005' (hash=175) disimpan di node 177
+[REGISTER] Kurir 'kurir-012' (hash=116) disimpan di node 136
+
+--- Lookup sebelum perubahan topologi ---
+[LOOKUP] 'kurir-001' (hash=50) -> node 102, IP 192.168.1.10
+kurir-001 -> 192.168.1.10
+[LOOKUP] 'kurir-002' (hash=28) -> node 40, IP 192.168.1.11
+kurir-002 -> 192.168.1.11
+[LOOKUP] 'kurir-012' (hash=116) -> node 136, IP 192.168.1.21
+kurir-012 -> 192.168.1.21
+[LOOKUP] 'kurir-005' (hash=175) -> node 177, IP 192.168.1.14
+kurir-005 -> 192.168.1.14
+
+--- Node baru bergabung ---
+[TODO] Node 'node-medan-1' (id=123) bergabung, alamat 10.0.0.5
+[JOIN] Node 'node-medan-1' (id=123) bergabung, alamat 10.0.0.5
+Successor lama untuk id=123: 136
+Key 'kurir-012' (hash=116) pindah dari node 136 ke node 123
+[LOOKUP] 'kurir-001' (hash=50) -> node 102, IP 192.168.1.10
+kurir-001 -> 192.168.1.10
+[LOOKUP] 'kurir-012' (hash=116) -> node 123, IP 192.168.1.21
+kurir-012 -> 192.168.1.21
+
+--- Sebuah node keluar ---
+[LEAVE] Node 'node-jakarta-1' (id=177) keluar dari ring
+Key 'kurir-005' (hash=175) pindah dari node 177 (10.0.0.1) ke node 40 (10.0.0.3)
+[LOOKUP] 'kurir-001' (hash=50) -> node 102, IP 192.168.1.10
+kurir-001 -> 192.168.1.10
+[LOOKUP] 'kurir-002' (hash=28) -> node 40, IP 192.168.1.11
+kurir-002 -> 192.168.1.11
+[LOOKUP] 'kurir-005' (hash=175) -> node 40, IP 192.168.1.14
+kurir-005 -> 192.168.1.14
