@@ -34,7 +34,76 @@ Keunggulan mengguanakan alamat DHT/Chord Id kurir dapat digunakan sebagai identi
 Serta menghindari ketergantungan dengan server pusat, karena akan didistribusikan kepada node yang bertanggung jawab menanganinya, serta pencarian dapat menjadi lebih efisien. 
 
 2. Gambarkan (boleh pakai Mermaid, lihat Tugas 2) ring topology dari simulasi kalian, tandai node mana yang bertanggung jawab atas ID Kurir mana.
+
+Dari hasil simulasi dengan ruang identifier 0–255 (8 bit), berikut hasil hash dari node dan kurir:
+- **Node**:
+  - `node-bandung-1` = 40
+  - `node-jakarta-2` = 102
+  - `node-surabaya-1` = 136
+  - `node-jakarta-1` = 177
+- **Kurir**:
+  - `kurir-002` = 28 -> disimpan di `node-bandung-1` (successor pertama >= 28)
+  - `kurir-001` = 50 -> disimpan di `node-jakarta-2` (successor pertama >= 50)
+  - `kurir-003` = 132 -> disimpan di `node-surabaya-1` (successor pertama >= 132)
+
+```mermaid
+graph TD
+    NB["node-bandung-1<br>(ID: 40)"]
+    NJ2["node-jakarta-2<br>(ID: 102)"]
+    NS["node-surabaya-1<br>(ID: 136)"]
+    NJ1["node-jakarta-1<br>(ID: 177)"]
+
+    NB --> NJ2
+    NJ2 --> NS
+    NS --> NJ1
+    NJ1 -->|wrap-around| NB
+
+    K2["kurir-002 (hash: 28)"] -.->|disimpan di| NB
+    K1["kurir-001 (hash: 50)"] -.->|disimpan di| NJ2
+    K3["kurir-003 (hash: 132)"] -.->|disimpan di| NS
+```
+
+**Penelusuran manual lookup kurir-001:**
+1. Hash dari `kurir-001` dihitung: `SHA1("kurir-001") % 256` = 50.
+2. Sistem mengecek daftar node di ring secara berurutan: `[40, 102, 136, 177]`.
+3. Node 40 dilewati karena 40 < 50. Masuk ke node berikutnya yaitu 102. Karena 102 >= 50, maka node penanggung jawab (successor) adalah `node-jakarta-2`.
+4. Alamat IP `192.168.1.10` berhasil diambil dari data `node-jakarta-2`.
+
 3. Jelaskan apa yang terjadi pada mapping saat sebuah node **keluar** dari ring (siapa yang mengambil alih tanggung jawabnya) — dukung dengan output program.
+
+Saat sebuah node keluar dari ring, data dan rentang hash yang sebelumnya dipegang oleh node tersebut akan dialihkan ke **successor langsungnya** (node aktif berikutnya searah jarum jam).
+
+Pada simulasi:
+1. Node yang keluar adalah `node-jakarta-1` (id=177).
+2. Node berikutnya setelah 177 di ring adalah `node-bandung-1` (id=40) melalui mekanisme *wrap-around* (karena 177 adalah ID terbesar di ring).
+3. Maka tanggung jawab rentang hash milik `node-jakarta-1` (137 sampai 177) otomatis dialihkan ke `node-bandung-1`.
+4. Jika ada data kurir yang dipegang oleh node yang keluar, data tersebut dipindahkan ke successor barunya sehingga lookup IP kurir tetap berhasil dan sistem tetap berjalan normal.
+
+**Output Program:**
+```text
+[JOIN] Node 'node-jakarta-1' (id=177) bergabung, alamat 10.0.0.1
+[JOIN] Node 'node-jakarta-2' (id=102) bergabung, alamat 10.0.0.2
+[JOIN] Node 'node-bandung-1' (id=40) bergabung, alamat 10.0.0.3
+[JOIN] Node 'node-surabaya-1' (id=136) bergabung, alamat 10.0.0.4
+
+[REGISTER] Kurir 'kurir-001' (hash=50) -> IP 192.168.1.10 disimpan di node 102
+[REGISTER] Kurir 'kurir-002' (hash=28) -> IP 192.168.1.11 disimpan di node 40
+[REGISTER] Kurir 'kurir-003' (hash=132) -> IP 192.168.1.12 disimpan di node 136
+
+--- Lookup sebelum perubahan topologi ---
+kurir-001 -> 192.168.1.10
+kurir-002 -> 192.168.1.11
+
+--- Node baru bergabung ---
+[JOIN] Node 'node-medan-1' (id=123) bergabung, alamat 10.0.0.5
+kurir-001 -> 192.168.1.10
+
+--- Sebuah node keluar ---
+[LEAVE] Node 'node-jakarta-1' (id=177) keluar dari ring
+        Tanggung jawab dialihkan ke successor: id=40 (node-bandung-1)
+kurir-001 -> 192.168.1.10
+kurir-002 -> 192.168.1.11
+```
 
 ## Struktur Submission
 
@@ -65,7 +134,50 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 ## Hasil Analisis Kelompok:
 
 ### 1. Keunggulan DHT/Chord Dibandingkan Flat Naming dan DNS Konvensional
+Pada kasus FoodGo, ID kurir tetap tetapi alamat IP kurir sering berubah karena berpindah lokasi:
+- **Dibanding Flat Naming (tabel pusat):** Tabel pusat memang mudah dibuat, tetapi semua request update IP dan pencarian akan menumpuk di satu server (*bottleneck* dan *single point of failure*). Di Chord DHT, data mapping disebar ke berbagai node di ring sehingga beban terdistribusi merata dan tidak bergantung pada satu server tunggal.
+- **Dibanding DNS konvensional:** DNS mengandalkan caching berbasis TTL. Karena IP kurir cepat berpindah, klien berisiko membaca IP lama yang basi dari cache (*stale data*). Di Chord DHT, pembaruan IP langsung tercatat di node penanggung jawab saat itu juga tanpa masalah delay cache.
 
 ### 2. Topologi Ring Simulasi dan Pemetaan ID Kurir
+Simulasi menggunakan identifier 8-bit (ruang nilai 0–255) dengan fungsi hash `SHA-1(key) % 256`:
+- **Node Hash**:
+  - `node-bandung-1` = 40
+  - `node-jakarta-2` = 102
+  - `node-surabaya-1` = 136
+  - `node-jakarta-1` = 177
+- **Kurir Hash**:
+  - `kurir-002` = 28 -> disimpan di `node-bandung-1` (successor pertama >= 28)
+  - `kurir-001` = 50 -> disimpan di `node-jakarta-2` (successor pertama >= 50)
+  - `kurir-003` = 132 -> disimpan di `node-surabaya-1` (successor pertama >= 132)
 
-### 3. 
+```mermaid
+graph TD
+    NB["node-bandung-1<br>(ID: 40)"]
+    NJ2["node-jakarta-2<br>(ID: 102)"]
+    NS["node-surabaya-1<br>(ID: 136)"]
+    NJ1["node-jakarta-1<br>(ID: 177)"]
+
+    NB --> NJ2
+    NJ2 --> NS
+    NS --> NJ1
+    NJ1 -->|wrap-around| NB
+
+    K2["kurir-002 (hash: 28)"] -.->|disimpan di| NB
+    K1["kurir-001 (hash: 50)"] -.->|disimpan di| NJ2
+    K3["kurir-003 (hash: 132)"] -.->|disimpan di| NS
+```
+
+**Penelusuran lookup kurir-001:**
+1. Hash ID `kurir-001` adalah 50.
+2. Dicocokkan ke urutan node pada ring: `[40, 102, 136, 177]`.
+3. Node 40 dilewati karena 40 < 50. Node berikutnya adalah 102 (102 >= 50), sehingga successor penanggung jawabnya adalah `node-jakarta-2`.
+4. Alamat IP `192.168.1.10` berhasil diambil dari `node-jakarta-2`.
+
+### 3. Pengalihan Tanggung Jawab Saat Node Keluar (Node Leave)
+Saat sebuah node keluar dari ring, data dan rentang hash yang dipegangnya dialihkan ke **successor langsungnya** (node berikutnya searah jarum jam).
+Pada simulasi:
+1. `node-jakarta-1` (id=177) keluar dari ring.
+2. Successor berikutnya dari 177 di ring adalah `node-bandung-1` (id=40) melalui mekanisme *wrap-around* (karena 177 adalah ID tertinggi).
+3. Tanggung jawab rentang hash milik `node-jakarta-1` (137–177) otomatis dialihkan ke `node-bandung-1`.
+4. Jika node yang keluar memegang data kurir, datanya ikut dipindahkan ke successor barunya sehingga proses lookup IP kurir tetap berjalan normal.
+
