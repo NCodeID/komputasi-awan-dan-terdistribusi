@@ -1,0 +1,16 @@
+=== Skenario NAIF (tanpa Read-Your-Writes) ===
+[Jakarta] WRITE saldo user1 = 50000.0 (versi 1)
+Replikasi ke Bandung tertunda 2.0 detik
+Baca saldo dari Bandung (naif): 0.0
+-> Harusnya 50000, tapi karena delay replikasi, hasilnya bisa 0 (BUG)
+[Bandung] WRITE saldo user1 = 50000.0 (versi 1)
+Baca saldo dari Bandung setelah replikasi: 50000.0
+
+=== Skenario dengan Read-Your-Writes ===
+[Jakarta] WRITE saldo user1 = 70000.0 (versi 2)
+Replikasi ke Bandung tertunda 2.0 detik
+Baca saldo dari Bandung sebelum replikasi kedua: 50000.0
+[Read-Your-Writes] Versi Bandung belum cukup; baca dari Jakarta
+Baca saldo dengan Read-Your-Writes: 70000.0
+[Bandung] WRITE saldo user1 = 70000.0 (versi 2)
+Baca saldo dari Bandung setelah replikasi kedua: 70000.0
