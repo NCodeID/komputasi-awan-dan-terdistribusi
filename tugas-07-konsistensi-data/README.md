@@ -16,7 +16,53 @@ Sehingga diperlukan sebuah consistency, pada kasus ini lebih baik menggunakan ev
 Kekurangannya adalah ketika saldo kurang namun sudah melakukan top-up namun dianggap saldo masih tidak cukup ketika ingin melakukan transaksi.
 2. Jika kalian menyimpulkan Eventual Consistency saja **tidak cukup** untuk skenario ini, usulkan pendekatan **Client-Centric Consistency** yang relevan (mis. *Read-Your-Writes*: pelanggan yang baru top-up harus selalu melihat saldo terbarunya sendiri, walau replika lain belum sinkron). <br>
 Masalah yang belum diselesaikan dalam eventual consistency adalah ketika saldo kurang namun sudah melakukan top-up namun dianggap saldo masih tidak cukup ketika ingin melakukan transaksi. Maka solusi yang bisa diberikan adalah read-your-writes, sehingga tidak perlu menunggu replika lain sinkron terlebih dahulu namun cukup melihat apakah pada log (writes) telah melakukan sebuah aksi semisal top-up sehingga saldo akan dibaca sebagai cukup dan transaksi dapat dilanjutkan. Setelah itu replika yang lain akan ikut konsisten dengan metode eventual consistency.
-3. Gambarkan **diagram alir urutan (sequence diagram)** yang menunjukkan operasi read/write antara pelanggan, server Jakarta, server Bandung, dan proses replikasi — untuk skenario **tanpa** jaminan konsistensi (bug terjadi) DAN skenario **dengan** solusi yang kalian usulkan (bug teratasi). Pakai Mermaid (`sequenceDiagram`) di `README.md` — lihat contoh cara pakai di Tugas 2.
+3. Sequence Diagram Mermaid:
+Skenario (Bug Replikasi):
+```mermaid
+sequenceDiagram
+    autonumber
+    actor P as Pelanggan
+    participant J as Server Jakarta (primary)
+    participant R as Timer replikasi (2 detik)
+    participant B as Server Bandung
+    P->>J: top_up(user1, Rp 50.000)
+    Note over J: write saldo = 50.000, versi 1
+    J-->>P: OK, saldo Rp 50.000
+    J->>R: threading.Timer(REPLICATION_DELAY)
+    Note over R,B: Replikasi tertunda 2 detik
+    P->>B: baca_saldo_naif(user1)
+    B-->>P: saldo Rp 0
+    Note over B: BUG / MASALAH: stale read, seharusnya Rp 50.000
+    R->>B: write saldo 50.000, versi 1
+    Note over B: Replika akhirnya konsisten
+```
+Skenario Solusi:
+```mermaid
+sequenceDiagram
+    autonumber
+    actor P as Pelanggan
+    participant J as Server Jakarta (primary)
+    participant R as Timer replikasi (2 detik)
+    participant B as Server Bandung
+    P->>J: top_up(user1, Rp 50.000)
+    J-->>P: OK, saldo Rp 50.000, versi 1
+    J->>R: threading.Timer(REPLICATION_DELAY)
+    R->>B: write saldo 50.000, versi 1
+    Note over B: Bandung sudah sinkron untuk versi 1
+    P->>J: top_up(user1, Rp 20.000)
+    Note over J: Sequential: write diurutkan di primary
+    J-->>P: OK, saldo Rp 70.000, versi 2
+    Note over P: Klien simpan versi_terakhir = 2
+    J->>R: threading.Timer(REPLICATION_DELAY)
+    P->>B: baca_saldo_read_your_writes(user1, versi_minimal = 2)
+    alt versi lokal Bandung < versi_minimal
+        Note over B: SOLUSI: Read-Your-Writes, jangan kembalikan data lama
+        B->>J: redirect baca saldo
+        J-->>B: saldo Rp 70.000, versi 2
+    end
+    B-->>P: saldo Rp 70.000
+    R->>B: write saldo 70.000, versi 2
+```
 
 ### Bagian 2 — Simulasi (opsional, nilai tambah)
 
@@ -52,10 +98,3 @@ tugas-07-konsistensi-data/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh bertanya konsep umum consistency model ke AI untuk brainstorming; **tidak boleh** meminta AI menuliskan analisis akhir/sequence diagram atau isi `# TODO` di `src/replica_simulation.py` yang tinggal ditempel. Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - Sebagai bukti pemahaman konsep (bukan hafalan jawaban skenario FoodGo saja), `README.md` wajib menyertakan **satu skenario tambahan** yang kalian buat sendiri (mis. kasus lain di aplikasi ojek online) dan menentukan model konsistensi yang tepat untuk skenario tambahan tersebut.
-
-## Hasil Diskusi Kelompok
-
-### 1. Analisis Konsistensi
-
-### 2. Sequence Diagram Mermaid
-
