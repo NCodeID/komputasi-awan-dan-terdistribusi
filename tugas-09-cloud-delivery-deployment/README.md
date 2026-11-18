@@ -42,3 +42,17 @@ Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — li
 
 - Jawaban yang terasa seperti "template" (bisa dipakai untuk sistem cloud apa saja tanpa menyebut spesifik kependudukan/data pribadi/regulasi) akan dinilai rendah pada komponen ketepatan rekomendasi.
 - `README.md` wajib membahas minimal satu skenario tandingan yang kalian buat sendiri (mis. "bagaimana jika instansi daerah tidak punya infrastruktur private cloud sendiri?") beserta jawabannya.
+
+## Analisis Sistem Data Kependudukan
+
+### 1. Rekomendasi deployment model
+
+Menggunakan **Private Cloud** yang dikelola langsung oleh pemerintah untuk Sistem Data Kependudukan. Alasannya:
+
+| Karakteristik NIST | Penerapan pada sistem |
+|---|---|
+| **On-demand self-service** | Tim pemerintah dapat membuat VM atau menambah kapasitas aplikasi secara otomatis sesuai kebutuhan, tetapi tetap mengikuti batas penggunaan dan aturan akses yang sudah ditentukan. |
+| **Broad network access** | Berbagai instansi seperti Dukcapil, kepolisian, dan bank dapat mengakses layanan melalui jaringan yang sudah disediakan, misalnya menggunakan HTTPS. Namun, setiap akses tetap diperiksa agar hanya pihak yang memiliki izin yang dapat menggunakan layanan tersebut. |
+| **Resource pooling** | Sumber daya seperti server, penyimpanan, dan jaringan milik pemerintah digunakan bersama sesuai kebutuhan setiap layanan. Akses ke database utama juga dipisahkan dan dibatasi agar data kependudukan tetap aman. |
+| **Rapid elasticity** | Kapasitas server dan aplikasi dapat ditambah atau dikurangi sesuai jumlah pengguna. Saat terjadi lonjakan akses, seperti musim pemilu atau pendaftaran sekolah, pemerintah perlu menyiapkan kapasitas tambahan agar sistem tetap berjalan lancar tanpa membebani database utama. |
+| **Measured service** | Penggunaan sumber daya seperti CPU, penyimpanan, bandwidth, dan jumlah permintaan dari setiap instansi dipantau dan dicatat. Tujuannya agar penggunaan dapat dikontrol, kapasitas bisa direncanakan, dan aktivitas akses dapat diawasi tanpa menyimpan data sensitif seperti NIK atau biometrik secara langsung dalam log. |
