@@ -71,3 +71,34 @@ Sistem ini **tidak memakai satu service model untuk semua komponennya**. Kompone
 | **Notifikasi ke warga** (email/SMS status permohonan) | **SaaS** | Layanan pengiriman notifikasi berlangganan. Isi pesannya hanya nomor tiket dan tautan, bukan data pribadi kependudukan. |
 
  Kesimpulan pembagian:  **komponen yang menyimpan atau memproses data pribadi tetap di IaaS/private cloud, sedangkan komponen yang hanya menangani metadata atau status boleh memakai PaaS/SaaS.** Dengan begitu, skalabilitas tetap didapat dari layanan dapat terkelola tanpa menyerahkan data kependudukan ke infrastruktur yang tidak dikendalikan oleh negara.
+
+### 3. Risiko spesifik dan mitigasinya
+
+Penggunaan **Private Cloud** sebagai pusat data utama yang digabungkan dengan layanan **PaaS/SaaS luar** untuk kebutuhan pendukung memiliki beberapa risiko yang perlu diantisipasi:
+
+1. **Server Private Cloud penuh saat akses melonjak bersamaan**
+   * **Risiko:** Karena memakai Private Cloud milik pemerintah, jumlah server fisiknya terbatas. Saat musim pemilu atau pendaftaran sekolah, ribuan instansi (Dukcapil, bank, kepolisian) mengakses layanan secara bersamaan sehingga server berisiko penuh dan layanan verifikasi menjadi lambat atau mati (*downtime*).
+   * **Mitigasi:** Menyiapkan cadangan kapasitas server jauh hari sebelum jadwal pemilu atau tahun ajaran baru. Selain itu, membatasi jumlah permintaan per detik dari tiap instansi dan menyimpan sementara hasil verifikasi yang sering dicek agar beban database utama berkurang.
+
+2. **Data pribadi tidak sengaja ikut terkirim ke layanan luar**
+   * **Risiko:** Pada rancangan poin 2, portal pengecekan status, pencatatan log, dan pengiriman notifikasi memakai layanan luar (PaaS/SaaS publik) agar lebih ringan. Jika terjadi kesalahan pengaturan sistem, data rahasia seperti NIK, nama, atau alamat bisa ikut terkirim dan tersimpan di server pihak ketiga tersebut.
+   * **Mitigasi:** Menyaring data sebelum keluar dari jaringan pemerintah sehingga hanya nomor tiket dan status proses yang dikirim ke portal publik atau pesan notifikasi. Sistem pencatatan log juga diatur agar otomatis menyembunyikan angka NIK jika tidak sengaja tercatat.
+
+3. **Penyalahgunaan akses jika sistem instansi mitra diretas**
+   * **Risiko:** Karena sistem terhubung dengan ribuan instansi seperti bank dan Dukcapil daerah, jika akun atau sistem di salah satu daerah diretas, pelaku bisa memakai jalur akses tersebut untuk mengambil data kependudukan dalam jumlah besar.
+   * **Mitigasi:** Mewajibkan jalur koneksi khusus yang terenkripsi serta verifikasi identitas perangkat untuk setiap instansi mitra. Sistem juga memantau pola akses secara rutin—jika ada instansi yang meminta data secara tidak wajar (misalnya ribuan data di tengah malam), aksesnya langsung diblokir sementara.
+
+---
+
+### 4. Perbandingan dengan alternatif yang ditolak
+
+Alternatif yang ditolak dalam rancangan ini adalah **Public Cloud murni**, yaitu menaruh seluruh sistem—termasuk database inti NIK, alamat, dan data biometrik—di server milik penyedia layanan cloud komersial.
+
+| Aspek Perbandingan | Pilihan Kami (Private Cloud + Layanan Luar Non-Sensitif) | Alternatif Ditolak (Public Cloud Murni) |
+|---|---|---|
+| **Kendali atas data rahasia** | **Penuh di tangan negara.** Server fisik, sistem, dan pengamanan database dikelola langsung oleh pemerintah. | **Terbatas.** Server fisik dikelola oleh perusahaan penyedia layanan cloud pihak ketiga. |
+| **Keamanan & kepatuhan UU PDP** | **Tinggi.** Data pribadi warga tidak bercampur dengan pengguna umum dan lebih mudah diaudit oleh negara. | **Kurang sesuai.** Berisiko melanggar aturan karena data kependudukan berada di luar kendali penuh negara. |
+| **Penanganan lonjakan akses** | **Cukup dan terukur.** Trafik portal publik dialihkan ke layanan luar, sedangkan akses verifikasi diatur batasannya. | **Sangat besar**, tetapi berlebihan jika harus mengorbankan keamanan data inti kependudukan. |
+
+**Alasan Penolakan:**
+Public Cloud murni ditolak karena bertentangan dengan syarat utama sistem, yaitu data kependudukan yang sangat rahasia wajib berada di bawah kendali penuh negara sesuai UU Perlindungan Data Pribadi. Kemudahan Public Cloud dalam menampung lonjakan akses sebenarnya sudah bisa ditutupi oleh rancangan kami, yaitu dengan memindahkan portal publik (yang tidak menyimpan data pribadi) ke layanan PaaS/SaaS luar. Dengan begitu, pemerintah tetap aman dari lonjakan pengunjung tanpa harus menyerahkan database kependudukan ke pihak luar.
