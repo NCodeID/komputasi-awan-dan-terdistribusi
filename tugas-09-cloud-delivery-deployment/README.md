@@ -102,3 +102,16 @@ Alternatif yang ditolak dalam rancangan ini adalah **Public Cloud murni**, yaitu
 
 **Alasan Penolakan:**
 Public Cloud murni ditolak karena bertentangan dengan syarat utama sistem, yaitu data kependudukan yang sangat rahasia wajib berada di bawah kendali penuh negara sesuai UU Perlindungan Data Pribadi. Kemudahan Public Cloud dalam menampung lonjakan akses sebenarnya sudah bisa ditutupi oleh rancangan kami, yaitu dengan memindahkan portal publik (yang tidak menyimpan data pribadi) ke layanan PaaS/SaaS luar. Dengan begitu, pemerintah tetap aman dari lonjakan pengunjung tanpa harus menyerahkan database kependudukan ke pihak luar.
+
+### 5. Contoh Skenario
+Skenario: Daerah 3T Tanpa Infrastruktur Sendiri.
+Deskripsi: Disdukcapil Kabupaten X terletak di daerah 3T (terdepan, terluar, dan tertinggal). Anggaran teknologi informasinya tidak ada; hanya ada satu operator yang merangkap berbagai tugas; pasokan listrik dan jaringan kerap terputus. Meski demikian, kabupaten tersebut tetap dituntut melayani sekitar lebih dari 255 ribu penduduk sekaligus memenuhi permintaan verifikasi NIK dari Bank Pembangunan Daerah setempat. Persoalannya, apabila model Hybrid menuntut setiap kabupaten menyediakan segmen privat sendiri, rekomendasi itu otomatis tidak dapat direalisasikan bagi lebih dari 400 kabupaten/kota.
+
+Jawaban Kelompok: Kabupaten X ada disini bukan sebagai pemilik infrastruktur, melainkan hanya sebatas menjadi konsumen. Sebab, sistem kependudukan nasional merupakan satu database (basis data) tunggal, bukan sebuah sistem daerah yang saling menyinkronkan data.
+
+Data induk dan data biometrik tetap berada pada server privat di pusat data nasional. Pemerintah daerah tidak menyimpan template biometrik; yang diterima hanyalah token verifikasi dengan waktu alive tertentu.
+Maka kabupaten/kota berperan sebagai node bersama tingkat provinsi, yakni community cloud yang dikelola Kementerian Komunikasi dan Digital provinsi serta diaudit setiap tahun. Dengan begitu, resource pooling berlangsung pada skala yang sanggup ditanggung APBD daerah.
+
+
+
+
