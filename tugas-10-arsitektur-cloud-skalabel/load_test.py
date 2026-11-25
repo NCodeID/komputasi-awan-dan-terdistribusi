@@ -18,6 +18,9 @@ CONCURRENCY = 30
 hasil = Counter()
 lock = threading.Lock()
 
+# Semaphore dipakai untuk membatasi jumlah thread aktif (lihat TODO 3)
+semaphore = threading.Semaphore(CONCURRENCY)
+
 
 def kirim_request():
     # TODO 1: lakukan GET request ke TARGET_URL, baca body response
@@ -30,10 +33,18 @@ def kirim_request():
             # yang kalian buat di app.py, lalu:
             # with lock:
             #     hasil[instance_id] += 1
-            pass
+
+            # Kalau body-nya cuma "app1", ya langsung dipakai.
+            # Kalau formatnya "Instance: app1", ambil bagian setelah titik dua.
+            instance_id = body.strip().split(":")[-1].strip()
+            with lock:
+                hasil[instance_id] += 1
     except Exception as e:
         with lock:
             hasil["ERROR"] += 1
+    finally:
+        # Lepas "slot" supaya thread berikutnya boleh jalan
+        semaphore.release()
 
 
 def main():
@@ -42,11 +53,16 @@ def main():
 
     threads = []
     for _ in range(TOTAL_REQUESTS):
+        # TODO 3: batasi jumlah thread aktif bersamaan sesuai CONCURRENCY
+        # (mis. dengan semaphore, atau proses batch per CONCURRENCY thread).
+
+        # Ambil slot dulu. Kalau sudah ada 30 thread aktif, loop akan
+        # menunggu di sini sampai ada thread yang selesai.
+        semaphore.acquire()
+
         t = threading.Thread(target=kirim_request)
         threads.append(t)
         t.start()
-        # TODO 3: batasi jumlah thread aktif bersamaan sesuai CONCURRENCY
-        # (mis. dengan semaphore, atau proses batch per CONCURRENCY thread).
 
     for t in threads:
         t.join()
