@@ -65,3 +65,21 @@ tugas-10-arsitektur-cloud-skalabel/
 Kebijakan **Level 2 (AI Assisted Idea Generation & Structuring)** berlaku — lihat [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Boleh bertanya konsep umum load balancing ke AI; **tidak boleh** meminta AI menuliskan isi `# TODO` di `app/app.py`, `nginx/nginx.conf`, atau `load_test.py`. Catat pemakaian AI di "Log Penggunaan AI" pada `JURNAL.md`.
 
 - `JURNAL.md` wajib mencatat apa yang terjadi jika satu instance `app` dimatikan saat load test berjalan (jalankan skenario ini dan catat hasilnya, jangan cuma diklaim tanpa data).
+
+
+## Hasil Analisis Kelompok
+
+### 1. Bukti distribusi beban dari load test horizontal:
+Berikut merupakan bukti distribusi beban: <br/>
+![HorizontalScale](bukti/loadTesting.png)
+
+Scale Up:<br/>
+![HorizontalScaleAdvanced](bukti/H-Scale-LoadTesting.png)
+
+### 2. Perbandingan Horizontal Scaling dengan Vertical Scaling:
+Berdasarkan hasil pengujian (300 request, concurrency 30), Horizontal Scaling (3–4 instance kecil) terbukti jauh lebih tangguh untuk skenario thundering herd seperti TicketGo, dengan waktu eksekusi 2x lebih cepat (0.58 detik vs 1.15 detik).
+
+Bukti:<br/>
+![HorizontalScaleAdvanced](bukti/H-Scale-LoadTesting.png)
+<br/>vs<br/>
+![HorizontalScaleAdvanced](bukti/V-Scale-LoadTesting.png)
