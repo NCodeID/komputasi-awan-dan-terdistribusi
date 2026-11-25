@@ -30,6 +30,13 @@ Kondisi testing (app_v_scale | menggunakan image dari app1)
 <br/>
 ![VerticalScaling](bukti/V-Scale-LoadTesting.png)
 
+## Skenario jika instance `app` dimatikan saat load test berjalan:
+Pada saat app dimatikan nginx akan langsung mengeluarkan app yang mati dari upstream dan tidak membuat process berhenti bukti:<br/>
+![Skenario](bukti/skenarioAppDimatikan.png)
+Namun ada lonjakan durasi menjadi yang awalnya 0.58 menjadi 14.49 detik
+
+Check [Nginx log](bukti/skenarioAppDimatikan-nginx.txt) disini
+
 ## Log Penggunaan AI (Level 2)
 
 > Wajib diisi sesuai kebijakan Level 2 di [`../RUBRIK-UMUM.md`](../RUBRIK-UMUM.md). Tulis "Tidak memakai AI" pada baris pertama jika memang tidak dipakai. Hanya untuk brainstorming ide/outline — bukan untuk kode/analisis/teks akhir.
