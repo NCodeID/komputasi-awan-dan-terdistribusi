@@ -83,3 +83,15 @@ Bukti:<br/>
 ![HorizontalScaleAdvanced](bukti/H-Scale-LoadTesting.png)
 <br/>vs<br/>
 ![HorizontalScaleAdvanced](bukti/V-Scale-LoadTesting.png)
+
+### 3. Keterbatasan simulasi dibanding Auto-Scaling:
+
+Pada simulasi TicketGo, kami melakukan manual scaling dengan menambahkan `app4` di `docker-compose.yml` dan *upstream* Nginx, lalu mengulang load test. Dari 300 request, Nginx membagi beban menjadi 100 request per instance pada skenario tiga instance dan 75 pada skenario empat instance. Durasi 0.58 detik diukur saat keempat instance sudah berjalan. Waktu untuk menambah kapasitas saat trafik melonjak belum diukur.
+
+Pada auto-scaling berbasis metrik, seperti AWS Auto Scaling Group, instance ditambah (*scale-out*) saat beban naik dan dikurangi (*scale-in*) saat beban turun sesuai kebijakan. Proses ini membutuhkan tiga komponen:
+
+1. **Metric collector** mencatat beban secara berkala, misalnya rata-rata penggunaan CPU atau jumlah request per instance.
+2. **Auto-scaler** membaca metrik dan menambah atau mengurangi instance sesuai kebijakan, dalam batas minimum dan maksimum.
+3. **Load balancer dan health check** memperbarui daftar backend secara otomatis. Instance baru menerima request setelah lolos pemeriksaan. Sebelum instance dihentikan, load balancer mengalihkan request baru dan memberi waktu agar request yang sedang berjalan selesai.
+
+Pada simulasi TicketGo, seluruh container masih menggunakan sumber daya dari satu laptop sehingga penambahan instance dibatasi oleh kapasitas perangkat tersebut. Berbeda dengan cloud sungguhan, instance dapat ditambah secara otomatis berdasarkan beban dan kapasitas infrastruktur yang tersedia. Namun, proses menjalankan instance baru hingga siap menerima request tetap membutuhkan waktu.
